@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+
 const InfoComponent = () => {
   const fetchData = async () => {
     const { data } = await axios.get(
@@ -7,15 +8,24 @@ const InfoComponent = () => {
     );
     return data;
   };
+
   const { data, error, isLoading } = useQuery({
     queryKey: ["events"],
     queryFn: fetchData,
     refetchInterval: 5000, // Refetch every 5 seconds
   });
-  //const dataString = data ? JSON.stringify(data, null, 2) : null;
+  
+  const timestamp = data ? new Date(data.timestamp * 1000).toLocaleString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZoneName: "short",    
+  }) : null;
 
-  //convert time to human readable format
-  const timestamp = data ? new Date(data.timestamp * 1000).toString() : null;
   if (isLoading) return <div>Loading...</div>;
 
   if (error) return <div>Error: {error.message}</div>;
@@ -26,7 +36,7 @@ const InfoComponent = () => {
           <h1 className="text-white timer px-5">00:00:00</h1>
         </div>
         <p className="text-white mb-1">Time until the ISS passes LOCATION</p>
-        <p className="text-white mb-5">Last updated at TIME</p>
+        <p className="text-white mb-5">Last updated at {timestamp}</p>
       </div>
 
       <h4 className="text-white mb-3">
