@@ -4,9 +4,14 @@
     font-weight: 750;
 }
 
-#background {
-    background-color: #222222;
-    min-height: 100vh; 
-    margin: 0;
-   
+#navbar {
+    background-color: rgba(31, 31, 31, 0.9);
 }
+
+#background {
+
+    background-color: #101010;
+    height: 100vh;
+}
+
+
