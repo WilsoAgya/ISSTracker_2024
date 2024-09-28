@@ -1,6 +1,6 @@
 const Main= ()=>{
     return(
-        <div className="row mx-auto g-3 py-2">
+        <div className="row mx-auto g-3 py-4">
     <div className="col-10 col-md-7 bg-white mx-auto  order-md-1 order-2 rounded-3 border" style={{ height: '400px' }}>
         GOOGLE MAP 
     </div>
