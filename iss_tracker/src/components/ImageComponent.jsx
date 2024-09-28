@@ -21,8 +21,9 @@ const ImageComponent = () => {
   if (error) return <div>Error: {error.message}</div>;
   return (
     <div>
-      {JSON.stringify(dataImage.url)}
-        <img src={dataImage.url} alt="NASA" />
+        <h2 className="my-2 text-light">{dataImage.title}</h2>
+        <img className="my-2 border border-light" src={dataImage.url} style={{ maxHeight: '600px', height: 'auto' }} alt="NASA" />
+        <p className="my-2 text-light">{dataImage.explanation}</p>
     </div>
   );
 };
