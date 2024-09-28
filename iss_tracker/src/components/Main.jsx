@@ -3,7 +3,7 @@ import ImageComponent from "./ImageComponent"
 
 const Main= ()=>{
     return(
-        <div className="row mx-auto g-3">
+        <div className="row mx-auto g-3 mt-5">
         <div className="col-10 col-md-6 bg-dark mx-auto rounded-3 shadow" style={{ height: '400px' }}>
         </div>
         
