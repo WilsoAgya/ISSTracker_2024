@@ -6,6 +6,10 @@ Hackathon Project for Simon Fraser University Computing Science Student Society 
 
 ## Development
 
+Add `.env` file to the `./iss_tracker` directory and update the Google Maps API key. Reference the `.env-sample` file for the required environment variables.
+
+Run the following commands to run the app locally:
+
 ```cmd
 cd ./iss_tracker/src
 npm install
