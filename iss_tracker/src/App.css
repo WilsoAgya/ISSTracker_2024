@@ -4,14 +4,31 @@
     font-weight: 750;
 }
 
-#navbar {
+h3 {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.darker {
     background-color: rgba(31, 31, 31, 0.9);
 }
 
-#background {
-
-    background-color: #101010;
-    height: 100vh;
+.lighter {
+    background-color: #555555;
 }
 
+#background {
+    background-color: #101010;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+}
 
+.timer {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+#content {
+    position: relative;
+    z-index: 1;
+    overflow-y: auto;
+}

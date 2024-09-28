@@ -6,9 +6,12 @@ import '../App.css';
 const Home = () => {
 
     return(
-        <div id='background'>
-            <Navbar />
-            <Main />
+        <div>
+            <div id='background'></div>
+            <div id='content'>
+                <Navbar/>
+                <Main/>
+            </div>
         </div>
     )
 }
