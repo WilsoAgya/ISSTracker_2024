@@ -2,6 +2,8 @@
 import react from "react";
 import QueryComp from "../components/QueryComp";
 
+import Navbar from '../components/Nav';
+import '../App.css'; 
 
 const Home = () => {
   
@@ -9,7 +11,9 @@ const Home = () => {
   
   return (
     <>
-      <h1>ISS_TRACKER</h1>
+      <body id='background'>
+            <Navbar></Navbar>
+        </body>
         <QueryComp />
     </>
   );
