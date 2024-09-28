@@ -11,7 +11,11 @@ const Home = () => {
   return (
     <>
       <div id='background'>
-      <div className="main"></div>
+
+        <div className="main"></div>
+
+     
+
             <Navbar />
             <Main />
         </div>
