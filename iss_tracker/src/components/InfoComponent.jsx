@@ -25,8 +25,7 @@ const InfoComponent = () => {
         <div className="lighter p-2 mt-3 mb-1 mx-5 rounded-2">
           <h1 className="text-white timer px-5">00:00:00</h1>
         </div>
-        <p className="text-white mb-1">Time until the ISS passes LOCATION</p>
-        <p className="text-white mb-5">Last updated at TIME</p>
+        <p className="text-white mb-5">Time until the ISS passes over SFU</p>
       </div>
 
       <h4 className="text-white mb-3">
