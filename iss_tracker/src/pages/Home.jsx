@@ -7,12 +7,10 @@ import Main from '../components/Main';
 import '../App.css'; 
 
 const Home = () => {
-  
-  
-  
   return (
     <>
       <div id='background'>
+      <div className="main"></div>
             <Navbar />
             <Main />
         </div>
