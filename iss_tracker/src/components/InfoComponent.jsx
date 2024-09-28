@@ -3,16 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 
 const InfoComponent = () => {
-  // Define the dates
-  
-  const date1 = new Date();
-  const date2 = new Date('2024-09-29T12:30:00');
-
-  // Calculate the difference in seconds
-  const differenceInSeconds = Math.floor((date2 - date1) / 1000);
-  
-  const [time, setTime] = useState(differenceInSeconds); // Set initial time
-
+ 
   // Fetching data using axios
   const fetchData = async () => {
     const { data } = await axios.get(
@@ -39,21 +30,47 @@ const InfoComponent = () => {
     timeZoneName: "short",    
   }) : null;
 
-  // Effect to handle timer countdown
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setTime((prevTime) => {
-        if (prevTime <= 0) {
-          clearInterval(intervalId);
-          return 0; // Stop timer at 0
-        }
-        return prevTime - 1; // Decrease time by 1 second
-      });
-    }, 1000);
+  const [time, setTime] = useState(0); // Set initial time
+  const [date2, setDate2] = useState(null); // To hold the fetched date
 
-    // Cleanup function
-    return () => clearInterval(intervalId);
+  // Effect to fetch date2 from the API
+  useEffect(() => {
+    const fetchDate = async () => {
+      try {
+        const n2yoApiKey = import.meta.env.VITE_N2YO_API_KEY;
+        const url = `https://api.n2yo.com/rest/v1/satellite/visualpasses/25544/49.246445/-122.994560/0/2/300/&apiKey=${n2yoApiKey}`;
+      
+        const response = await axios.get(url);
+        // Assuming the API returns an object with a 'date' field
+        setDate2(new Date(response.data.passes[0].startUTC * 1000));
+      } catch (error) {
+        console.error('Error fetching date:', error);
+      }
+    };
+
+    fetchDate();
   }, []);
+
+  // Effect to handle timer countdown when date2 is available
+  useEffect(() => {
+    if (date2) {
+      const differenceInSeconds = Math.floor((date2 - new Date()) / 1000);
+      setTime(differenceInSeconds);
+
+      const intervalId = setInterval(() => {
+        setTime((prevTime) => {
+          if (prevTime <= 0) {
+            clearInterval(intervalId);
+            return 0; // Stop timer at 0
+          }
+          return prevTime - 1; // Decrease time by 1 second
+        });
+      }, 1000);
+
+      // Cleanup function
+      return () => clearInterval(intervalId);
+    }
+  }, [date2]);
 
   // Convert time to human-readable format
   const formatTime = (seconds) => {
@@ -73,9 +90,8 @@ const InfoComponent = () => {
         <div className="lighter p-2 mt-3 mb-1 mx-5 rounded-2">
           <h1 className="text-white timer px-5">{formatTime(time)}</h1> {/* Display formatted time */}
         </div>
+        <p className="text-white mb-4">Time until the ISS passes SFU</p>
 
-        <p className="text-white mb-1">Time until the ISS passes LOCATION</p>
-        <p className="text-white mb-5">Last updated at {timestamp}</p>
       </div>
 
       <h4 className="text-white mb-3">
@@ -87,7 +103,8 @@ const InfoComponent = () => {
       <h4 className="text-white mb-3">
         Altitude: {data.altitude.toFixed(5)}{" "}
       </h4>
-      <h4 className="text-white mb-3">Speed: {data.velocity.toFixed(5)}</h4>
+      <h4 className="text-white mb-4">Speed: {data.velocity.toFixed(5)}</h4>
+      <p className="text-white mb-2">Last updated at {timestamp}</p>
     </div>
   );
 };
