@@ -1,9 +1,13 @@
 import react from 'react';
+import Navbar from '../components/Nav';
+import '../App.css'; 
 
 const Home = () => {
 
     return(
-        <h1>ISS_TRACKER</h1>
+        <body id='background'>
+            <Navbar></Navbar>
+        </body>
     )
 }
 
