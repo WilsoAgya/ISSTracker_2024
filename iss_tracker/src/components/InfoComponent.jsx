@@ -12,11 +12,23 @@ const InfoComponent = () => {
     return data;
   };
 
+
   const { data, error, isLoading } = useQuery({
     queryKey: ["events"],
     queryFn: fetchData,
-    refetchInterval: 5000, // Refetch every 5 seconds
+    refetchInterval: 1000, // Refetch every 1 second
   });
+  
+  const timestamp = data ? new Date(data.timestamp * 1000).toLocaleString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZoneName: "short",    
+  }) : null;
 
   const [time, setTime] = useState(0); // Set initial time
   const [date2, setDate2] = useState(null); // To hold the fetched date
@@ -67,8 +79,6 @@ const InfoComponent = () => {
     return `${hours}:${minutes}:${secs}`;
   };
 
-  const timestamp = data ? new Date(data.timestamp * 1000).toString() : null;
-
   if (isLoading) return <div>Loading...</div>;
 
   if (error) return <div>Error: {error.message}</div>;
@@ -81,8 +91,6 @@ const InfoComponent = () => {
         </div>
 
         <p className="text-white mb-4">Time until the ISS passes SFU</p>
-
-
 
       </div>
 
