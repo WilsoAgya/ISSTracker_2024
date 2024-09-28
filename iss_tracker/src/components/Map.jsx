@@ -22,7 +22,7 @@ const Map = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["issLocation"],
     queryFn: fetchData,
-    refetchInterval: 1000, // Refetch every 5 seconds
+    refetchInterval: 1000, // Refetch every 1 second
   });
 
   // Update latitude and longitude when data is fetched
