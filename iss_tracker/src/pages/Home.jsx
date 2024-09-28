@@ -14,7 +14,6 @@ const Home = () => {
             <Navbar />
             <Main />
         </div>
-        <Map />
     </>
   );
 };

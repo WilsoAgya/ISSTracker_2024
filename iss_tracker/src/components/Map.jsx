@@ -89,11 +89,7 @@ useEffect(() => {
 
   return (
     <div>
-      <h1>Map Component</h1>
       <div id="map" ref={mapRef} style={{ height: "400px" }}></div>
-      <p>Latitude: {latitude}</p>
-      <p>Longitude: {longitude}</p>
-      <p>Last Updated: {new Date(lastUpdateTimestamp * 1000).toString()}</p>
     </div>
   );
 };
