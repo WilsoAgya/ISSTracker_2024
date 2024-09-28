@@ -6,6 +6,7 @@ import { Loader } from "@googlemaps/js-api-loader";
 const Map = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
+  const [lastUpdateTimestamp, setLastUpdateTimestamp] = useState(null);
   const mapRef = useRef(null);
   const mapInstance = useRef(null);
   const markerInstance = useRef(null);
@@ -21,7 +22,7 @@ const Map = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["issLocation"],
     queryFn: fetchData,
-    refetchInterval: 5000, // Refetch every 5 seconds
+    refetchInterval: 1000, // Refetch every 5 seconds
   });
 
   // Update latitude and longitude when data is fetched
@@ -29,6 +30,7 @@ const Map = () => {
     if (data) {
       setLatitude(data.latitude);
       setLongitude(data.longitude);
+      setLastUpdateTimestamp(data.timestamp);
     }
   }, [data]);
 
@@ -44,6 +46,7 @@ useEffect(() => {
       const loader = new Loader({
         apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
         version: "weekly",
+        libraries: ["maps", "marker"],
       });
 
       loader
@@ -56,17 +59,26 @@ useEffect(() => {
               zoom: 4,
             });
 
-            // Add a marker to the map
-            markerInstance.current = new google.Marker({
-              position: { lat: latitude, lng: longitude },
-              map: mapInstance.current,
-              title: "International Space Station",
-            });
           } else {
             // Update the marker position when coordinates change
-            markerInstance.current.setPosition({ lat: latitude, lng: longitude });
             mapInstance.current.setCenter({ lat: latitude, lng: longitude });
           }
+        })
+        .catch((err) => console.error("Google Maps API failed to load:", err));
+
+        loader
+        .importLibrary("marker")
+        .then((google) => {
+            if (!markerInstance.current) {
+                markerInstance.current = new google.Marker({
+                    position: { lat: latitude, lng: longitude },
+                    map: mapInstance.current,
+                    title: "International Space Station",
+                  });
+            }
+            else {
+                markerInstance.current.setPosition({ lat: latitude, lng: longitude });
+            }
         })
         .catch((err) => console.error("Google Maps API failed to load:", err));
     }
@@ -81,6 +93,7 @@ useEffect(() => {
       <div id="map" ref={mapRef} style={{ height: "400px" }}></div>
       <p>Latitude: {latitude}</p>
       <p>Longitude: {longitude}</p>
+      <p>Last Updated: {new Date(lastUpdateTimestamp * 1000).toString()}</p>
     </div>
   );
 };
