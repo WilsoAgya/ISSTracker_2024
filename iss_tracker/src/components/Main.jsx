@@ -1,4 +1,5 @@
 import InfoComponent from "./InfoComponent"
+import ImageComponent from "./ImageComponent"
 
 const Main= ()=>{
     return(
@@ -9,6 +10,7 @@ const Main= ()=>{
         <div className="col-10 col-md-4 bg-dark mx-auto d rounded-3 py-3 px-5">
             <InfoComponent />
         </div>
+        <ImageComponent />
     </div>
     )
 }
