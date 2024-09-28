@@ -1,4 +1,6 @@
 /* eslint-disable no-unused-vars */
+import react from "react";
+import InfoComponent from "../components/InfoComponent";
 
 import Navbar from '../components/Nav';
 import Main from '../components/Main';
