@@ -2,11 +2,12 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 const ImageComponent = () => {
   const fetchDataImage = async () => {
-    const { data } = await axios.get(
-      "https://api.nasa.gov/planetary/apod?api_key=BvghcCqBudfLIbb5SosUa4pR89AtwOfTpZgpPpMB"
-    );
-    return data;
+  const apiKey = import.meta.env.VITE_NASA_API_KEY;
+  const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
+  const response = await axios.get(url);
+  return response.data;
   };
+  
   const { data: dataImage, error, isLoading } = useQuery({
     queryKey: ["picture"],
     queryFn: fetchDataImage,
@@ -15,7 +16,6 @@ const ImageComponent = () => {
   //const dataString = data ? JSON.stringify(data, null, 2) : null;
 
   //convert time to human readable format
-  const timestamp = dataImage ? new Date(dataImage.timestamp * 1000).toString() : null;
   if (isLoading) return <div>Loading...</div>;
 
   if (error) return <div>Error: {error.message}</div>;
