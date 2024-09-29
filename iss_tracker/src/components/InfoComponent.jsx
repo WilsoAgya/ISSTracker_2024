@@ -93,18 +93,22 @@ const InfoComponent = () => {
         <p className="text-white mb-4">Time until the ISS passes SFU</p>
 
       </div>
+      <div className="text-center">
+  <h4 className="text-white mb-3">
+    Longitude: {data.latitude.toFixed(4)}
+  </h4>
+  <h4 className="text-white mb-3">
+    Latitude: {data.longitude.toFixed(4)}
+  </h4>
+  <h4 className="text-white mb-3">
+    Altitude: {parseFloat(data.altitude.toFixed(2)).toLocaleString()} km
+  </h4>
+  <h4 className="text-white mb-4">
+    Speed: {parseFloat(data.velocity.toFixed(2)).toLocaleString()} km/h
+  </h4>
+  <p className="text-white mb-2 text-center">Last updated at {timestamp}</p>
+</div>
 
-      <h4 className="text-white mb-3">
-        Longitude: {data.latitude.toFixed(5)}
-      </h4>
-      <h4 className="text-white mb-3">
-        Latitude: {data.longitude.toFixed(5)}
-      </h4>
-      <h4 className="text-white mb-3">
-        Altitude: {data.altitude.toFixed(5)}{" "}
-      </h4>
-      <h4 className="text-white mb-4">Speed: {data.velocity.toFixed(5)}</h4>
-      <p className="text-white mb-2">Last updated at {timestamp}</p>
     </div>
   );
 };
