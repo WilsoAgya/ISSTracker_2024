@@ -89,7 +89,7 @@ useEffect(() => {
 
   return (
     <div>
-      <div id="map" ref={mapRef} style={{ height: "400px" }}></div>
+      <div id="map" className="rounded-3 w-100 " ref={mapRef} style={{ height: "400px" }}></div>
     </div>
   );
 };
