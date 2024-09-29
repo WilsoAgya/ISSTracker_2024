@@ -59,6 +59,7 @@ const ImageComponent = () => {
   <div className="col-md-6 my-2">
     <p className="py-5 text-light" style={{ textAlign: 'left' }}>{dataImage.explanation}</p> {/* Aligning the paragraph to the left */}
   </div>
+  <BasicDatePicker onDateChange={handleDateChange}/>
 </div>
 
   );
