@@ -38,7 +38,7 @@ const InfoComponent = () => {
     const fetchDate = async () => {
       try {
         const n2yoApiKey = import.meta.env.VITE_N2YO_API_KEY;
-        const url = `https://api.n2yo.com/rest/v1/satellite/visualpasses/25544/49.246445/-122.994560/0/2/300/&apiKey=${n2yoApiKey}`;
+        const url = `https://cors-anywhere.herokuapp.com/https://api.n2yo.com/rest/v1/satellite/visualpasses/25544/49.246445/-122.994560/0/2/300/&apiKey=${n2yoApiKey}`;
       
         const response = await axios.get(url);
         // Assuming the API returns an object with a 'date' field
