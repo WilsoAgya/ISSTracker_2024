@@ -19,12 +19,10 @@ export default function BasicDatePicker({ onDateChange }) {
     return (
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DemoContainer components={['DatePicker']}>
-          <DemoItem label="Desktop variant">
           <DesktopDatePicker
             value={selectedDate} // Use value instead of defaultValue to control the component
             onChange={handleDateChange}
           />
-          </DemoItem>
         </DemoContainer>
       </LocalizationProvider>
     );
