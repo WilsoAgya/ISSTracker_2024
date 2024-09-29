@@ -16,7 +16,7 @@ const InfoComponent = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["events"],
     queryFn: fetchData,
-    refetchInterval: 1000, // Refetch every 1 second
+    refetchInterval: 5000, // Refetch every 5 seconds
   });
   
   const timestamp = data ? new Date(data.timestamp * 1000).toLocaleString("en-US", {
@@ -38,7 +38,7 @@ const InfoComponent = () => {
     const fetchDate = async () => {
       try {
         const n2yoApiKey = import.meta.env.VITE_N2YO_API_KEY;
-        const url = `https://api.n2yo.com/rest/v1/satellite/visualpasses/25544/49.246445/-122.994560/0/2/300/&apiKey=${n2yoApiKey}`;
+        const url = `https://cors-anywhere.herokuapp.com/https://api.n2yo.com/rest/v1/satellite/visualpasses/25544/49.246445/-122.994560/0/2/300/&apiKey=${n2yoApiKey}`;
       
         const response = await axios.get(url);
         // Assuming the API returns an object with a 'date' field
@@ -93,18 +93,22 @@ const InfoComponent = () => {
         <p className="text-white mb-4">Time until the ISS passes SFU</p>
 
       </div>
+      <div className="text-center">
+  <h4 className="text-white mb-3">
+    Longitude: {data.latitude.toFixed(4)}
+  </h4>
+  <h4 className="text-white mb-3">
+    Latitude: {data.longitude.toFixed(4)}
+  </h4>
+  <h4 className="text-white mb-3">
+    Altitude: {parseFloat(data.altitude.toFixed(2)).toLocaleString()} km
+  </h4>
+  <h4 className="text-white mb-4">
+    Speed: {parseFloat(data.velocity.toFixed(2)).toLocaleString()} km/h
+  </h4>
+  <p className="text-white mb-2 text-center">Last updated at {timestamp}</p>
+</div>
 
-      <h4 className="text-white mb-3">
-        Longitude: {data.latitude.toFixed(5)}
-      </h4>
-      <h4 className="text-white mb-3">
-        Latitude: {data.longitude.toFixed(5)}
-      </h4>
-      <h4 className="text-white mb-3">
-        Altitude: {data.altitude.toFixed(5)}{" "}
-      </h4>
-      <h4 className="text-white mb-4">Speed: {data.velocity.toFixed(5)}</h4>
-      <p className="text-white mb-2">Last updated at {timestamp}</p>
     </div>
   );
 };
