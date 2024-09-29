@@ -20,11 +20,22 @@ const ImageComponent = () => {
 
   if (error) return <div>Error: {error.message}</div>;
   return (
-    <div>
-        <h2 className="my-2 text-light">{dataImage.title}</h2>
-        <img className="my-2 border border-light" src={dataImage.url} style={{ maxHeight: '600px', height: 'auto' }} alt="NASA" />
-        <p className="my-2 text-light">{dataImage.explanation}</p>
-    </div>
+    <div className="row d-flex align-items-center">
+  <div className="col-md-6">
+    <h1 className="text-light">Image of the Day</h1>
+    <h2 className="my-2 text-light" style={{ textAlign: 'center' }}>{dataImage.title}</h2> {/* Aligning the heading to the left */}
+    <img
+      className="my-2 border rounded border-light"
+      src={dataImage.url}
+      style={{ maxHeight: '400px', height: 'auto', width: '100%' }}
+      alt="NASA"
+    />
+  </div>
+  <div className="col-md-6 my-2">
+    <p className="py-5 text-light" style={{ textAlign: 'left' }}>{dataImage.explanation}</p> {/* Aligning the paragraph to the left */}
+  </div>
+</div>
+
   );
 };
 
